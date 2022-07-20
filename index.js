@@ -44,7 +44,7 @@ function includesDifferent(n){
     {
         if(n[i]!=n[i+1])
         {
-        different=true;
+//      different=true;
         return true;
         }
     }

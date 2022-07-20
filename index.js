@@ -134,3 +134,100 @@ console.log(validateCreditCard('6666-6666-6666-1666')); //{ valid: true, number:
 console.log(validateCreditCard('a923-3211-9c01-1112')); //{ valid: false,number: 'a923-3211-9c01-1112',error: '_invalid characters_' }
 console.log(validateCreditCard('4444-4444-4444-4444')); //{ valid: false,number: '4444-4444-4444-4444',error: '_only one type of number_' }
 console.log(validateCreditCard('1211-1111-1111-1112')); //{ valid: true, number: '1211-1111-1111-1112' }
+
+// Bonus 3:
+function validateDigits(creditCardNum){
+    return creditCardNum.length>13 && creditCardNum.length<17;
+}
+
+function validateCreditCardBonus3(creditCardNum) {
+    // returns an object // **Bonus #2:**  Return an object indicating whether the credit card is valid, and if not, what the error is
+    let validation = {
+        valid: false,
+        number: creditCardNum,
+        card: 'Card was not recognized!'
+    }
+
+    creditCardNum = removeDashes(creditCardNum);
+
+    if(validateDigits(creditCardNum))
+    {
+        if(isNumber(creditCardNum))
+        {
+            if(includesDifferent(creditCardNum))
+            {
+                    if(isSumGT16(creditCardNum))
+                    {
+                        let aeCard = /^(?:3[47][0-9]{13})$/;
+                        let visaCard = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+                        let masterCard = /^(?:5[1-5][0-9]{14})$/;
+                        let discoverCard = /^6(?:011|5[0-9]{2})[0-9]{12}/;
+                        let dinersCard =  /^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$/;
+                        let jcbCard =  /^(?:(?:2131|1800|35\d{3})\d{11})$/;
+                        let maestroCard= /^(5018|5081|5044|5020|5038|603845|6304|6759|676[1-3]|6799|6220|504834|504817|504645)[0-9]{8,15}$/;
+                        if(creditCardNum.match(aeCard))
+                        {
+                            validation.card = 'American Express';
+                            validation.valid = true;
+                        }
+                        else if(creditCardNum.match(visaCard))
+                        {
+                            validation.card = 'VISA';
+                            validation.valid = true;
+                        }
+                        else if(creditCardNum.match(masterCard))
+                        {
+                            validation.card = 'Master';
+                            validation.valid = true;
+                        }
+                        else if(creditCardNum.match(discoverCard))
+                        {
+                            validation.card = 'Discover';
+                            validation.valid = true;
+                        }
+                        else if(creditCardNum.match(dinersCard))
+                        {
+                            validation.card = 'Diners';
+                            validation.valid = true;
+                        }
+                        else if(creditCardNum.match(jcbCard))
+                        {
+                            validation.card = 'JCB';
+                            validation.valid = true;
+                        }                        
+                        else if(creditCardNum.match(maestroCard))
+                        {
+                            validation.card = 'Maestro';
+                            validation.valid = true;
+                        }
+                    }
+                    else
+                    validation.error = '_sum is less than 17_';
+                
+            }
+            else{
+                validation.error = '_only one type of number_';
+            }
+        }
+        else{
+            validation.error = '_invalid characters_';
+        }
+    }
+    else
+    {
+    validation.error = '_invalid number of digits_';
+    }
+    return validation;
+    };
+
+console.log(validateCreditCardBonus3('a923-3211-9c01-1112')); //{ valid: false,number: 'a923-3211-9c01-1112',error: '_invalid characters_' }
+console.log(validateCreditCardBonus3('4444-4444-4444-4444')); //{ valid: false,number: '4444-4444-4444-4444',error: '_only one type of number_' }
+console.log(validateCreditCardBonus3('5018011773003302')); // Maestro 
+console.log(validateCreditCardBonus3('4368589145622312')); // Visa16
+console.log(validateCreditCardBonus3('5299694182311539')); // MasterCard 
+console.log(validateCreditCardBonus3('6011594786717005')); // Discover 
+console.log(validateCreditCardBonus3('378562160256959')); //  AE
+console.log(validateCreditCardBonus3('30094853632161')); // Diners Club
+console.log(validateCreditCardBonus3('3577648817006573')); // JCB
+console.log(validateCreditCardBonus3('5595252046672181')); // Master
+console.log(validateCreditCardBonus3('4375528504009126')); // VISA

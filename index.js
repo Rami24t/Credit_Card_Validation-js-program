@@ -85,14 +85,54 @@ else
 // `{ valid: true, number: '9923-3211-9c01-1112' }`  
 // `{ valid: false, number: '9923-3211-9c01-1112', error: ‘wrong_length’ }`
 // ----------
+
+function validateCreditCard(creditCardNum) {
+    // returns an object // **Bonus #2:**  Return an object indicating whether the credit card is valid, and if not, what the error is
+    let validation = {
+        valid: false,
+        number: creditCardNum
+    }
+
+    creditCardNum = removeDashes(creditCardNum);
+
+    if(isNumber(creditCardNum))
+    {
+        if(is16digits(creditCardNum))
+        {
+            if(includesDifferent(creditCardNum))
+            {
+                if(isLastEven(creditCardNum))
+                {
+                    if(isSumGT16(creditCardNum))
+                    validation.valid = true;
+                    else
+                    validation.error = '_sum is less than 17_';
+                }
+                else
+                {
+                    validation.error = '_last number is odd_';
+                }
+            }
+            else{
+                validation.error = '_only one type of number_';
+            }
+        }
+        else{
+            validation.error = '_is not 16 digits_';
+        }
+    }
+    else
+    {
+    validation.error = '_invalid characters_';
+    }
+    return validation;
+    };
+
+
 // **Bonus #3:**  Make your credit card scheme even more advanced! What are the rules, and what are some numbers that pass or fail? Ideas: check expiration date! Check out the  [Luhn Algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)  for inspiration.
-
-
-
-
-// /**** tests Part 2: Bonus Parts *****/
+// /**** tests Part 2: Bonus Parts 1 and 2 *****/
 console.log(validateCreditCard('9999-7777-8888-0000')); //{ valid: true, number: '9999-7777-8888-0000' }
 console.log(validateCreditCard('6666-6666-6666-1666')); //{ valid: true, number: '6666-6666-6666-1666' }
-// console.log(validateCreditCard('a923-3211-9c01-1112')); //{ valid: false,number: 'a923-3211-9c01-1112',error: '_invalid characters_' }
-// console.log(validateCreditCard('4444-4444-4444-4444')); //{ valid: false,number: '4444-4444-4444-4444',error: '_only one type of number_' }
+console.log(validateCreditCard('a923-3211-9c01-1112')); //{ valid: false,number: 'a923-3211-9c01-1112',error: '_invalid characters_' }
+console.log(validateCreditCard('4444-4444-4444-4444')); //{ valid: false,number: '4444-4444-4444-4444',error: '_only one type of number_' }
 console.log(validateCreditCard('1211-1111-1111-1112')); //{ valid: true, number: '1211-1111-1111-1112' }

@@ -1,24 +1,10 @@
 // // # Project
 // # Credit Card Validation
-
-//------------------------------------------------------------------------------------------
-
-// **Bonus #1:**  A valid credit card number may also contain dashes, to make a card number easier to read. For example, the following credit card numbers are now also valid:
-// -   `9999-7777-8888-0000`
-// -   `6666-6666-6666-1666`
-
-// Update your program to allow such numbers. (Hint: Remove the dashes from the input string before checking if the input credit card number is valid.)
-
-// **Bonus #2:**  Return an object indicating whether the credit card is valid, and if not, what the error is  
-// `{ valid: true, number: '9923-3211-9c01-1112' }`  
-// `{ valid: false, number: '9923-3211-9c01-1112', error: ‘wrong_length’ }`
-
-// ----------
-
-// **Bonus #3:**  Make your credit card scheme even more advanced! What are the rules, and what are some numbers that pass or fail? Ideas: check expiration date! Check out the  [Luhn Algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)  for inspiration.
+//----------------------------------Part 1-----------------------------------
 
 function validateCreditCard(creditCardNum) {
 // returns  `true`  or  `false`
+n = removeDashes(n);
 return is16digits(creditCardNum) && isNumber(creditCardNum) && includesDifferent(creditCardNum) && isLastEven(creditCardNum)  && isSumGT16(creditCardNum);
 };
 
@@ -39,7 +25,7 @@ function isNumber(n){
 function includesDifferent(n){
     // returns  `true`  or  `false`
     l=n.length-1;
-    let different=false;
+//  let different=false;
     for(let i=0;i<l;i++)
     {
         if(n[i]!=n[i+1])
@@ -48,7 +34,8 @@ function includesDifferent(n){
         return true;
         }
     }
-    return different;
+//   return different;
+return false;
 }
 
 // The last digit must be even
@@ -56,8 +43,6 @@ function isLastEven(n){
     // returns  `true`  or  `false`
 return +n[15]%2==0
 }
-
-
 
 // Is the sum of all the digits must be greater than 16
 // Gives true only if the sum of all digits is greater than 16, otherwise gives false.
@@ -71,12 +56,36 @@ function isSumGT16(n){
     return sum>16;
 }
 
-
-
 /** tests for part 1 **/
 console.log('Tests part 1:\n',
-'Valid: ', validateCreditCard('9999777788880000'), validateCreditCard('6666666666661666'), '\n',
- 'Invalid: ', validateCreditCard('a92332119c011112'), validateCreditCard('4444444444444444'), validateCreditCard('1111111111111110'), validateCreditCard('6666666666666661'));
+'Valid:', validateCreditCard('9999777788880000'), validateCreditCard('6666666666661666'), '\n',
+ 'Invalid:', validateCreditCard('a92332119c011112'), validateCreditCard('4444444444444444'), validateCreditCard('1111111111111110'), validateCreditCard('6666666666666661'));
+
+
+
+//----------------------------------Part 2-----------------------------------
+// Removes dashes from a given string n and returns the new string. Example 9999-7777-8888-0000 gives 9999777788880000 as a result.
+function removeDashes(n){
+if(n.includes('-'))
+{
+    let length = n.length;
+    let result = '';
+    for(i=0;i<length;i++)
+    {
+        if(n[i]!='-' && +n[i] === +n[i])
+        result += n[i];
+    }
+    return result;
+}
+else
+    return n;
+}
+
+// **Bonus #2:**  Return an object indicating whether the credit card is valid, and if not, what the error is  
+// `{ valid: true, number: '9923-3211-9c01-1112' }`  
+// `{ valid: false, number: '9923-3211-9c01-1112', error: ‘wrong_length’ }`
+// ----------
+// **Bonus #3:**  Make your credit card scheme even more advanced! What are the rules, and what are some numbers that pass or fail? Ideas: check expiration date! Check out the  [Luhn Algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)  for inspiration.
 
 
 

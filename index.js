@@ -95,9 +95,9 @@ function validateCreditCard(creditCardNum) {
 
     creditCardNum = removeDashes(creditCardNum);
 
-    if(isNumber(creditCardNum))
+    if(is16digits(creditCardNum))
     {
-        if(is16digits(creditCardNum))
+        if(isNumber(creditCardNum))
         {
             if(includesDifferent(creditCardNum))
             {
@@ -118,12 +118,12 @@ function validateCreditCard(creditCardNum) {
             }
         }
         else{
-            validation.error = '_is not 16 digits_';
+            validation.error = '_invalid characters_';
         }
     }
     else
     {
-    validation.error = '_invalid characters_';
+    validation.error = '_is not 16 digits_';
     }
     return validation;
     };

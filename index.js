@@ -72,7 +72,7 @@ if(n.includes('-'))
     let result = '';
     for(i=0;i<length;i++)
     {
-        if(n[i]!='-' && +n[i] === +n[i])
+        if(n[i]!='-')
         result += n[i];
     }
     return result;
@@ -128,8 +128,6 @@ function validateCreditCard(creditCardNum) {
     return validation;
     };
 
-
-// **Bonus #3:**  Make your credit card scheme even more advanced! What are the rules, and what are some numbers that pass or fail? Ideas: check expiration date! Check out the  [Luhn Algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)  for inspiration.
 // /**** tests Part 2: Bonus Parts 1 and 2 *****/
 console.log(validateCreditCard('9999-7777-8888-0000')); //{ valid: true, number: '9999-7777-8888-0000' }
 console.log(validateCreditCard('6666-6666-6666-1666')); //{ valid: true, number: '6666-6666-6666-1666' }

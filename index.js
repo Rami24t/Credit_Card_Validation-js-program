@@ -36,7 +36,6 @@ function isNumber(n){
 }
 
 // Has at least two different digits represented (all of the digits cannot be the same)
-// n='4444444444444444'
 function includesDifferent(n){
     // returns  `true`  or  `false`
     l=n.length-1;

@@ -159,6 +159,8 @@ function validateCreditCard(creditCardNum) {
           return (nCheck % 10) == 0;
       }
     function validateCreditCardBonus3(creditCardNum) {
+		if(!creditCardNum)
+			return false;
         // returns an object // **Bonus #2:**  Return an object indicating whether the credit card is valid, and if not, what the error is
         let validation = {
             valid: false,
@@ -249,14 +251,14 @@ function validateCreditCard(creditCardNum) {
     console.log(validateCreditCardBonus3('4368589145622312')); // Visa16
     console.log(validateCreditCardBonus3('5299694182311539')); // MasterCard 
     console.log(validateCreditCardBonus3('6011594786717005')); // Discover 
-    console.log(validateCreditCardBonus3('378562160256959')); //  AE  
+    console.log(validateCreditCardBonus3('378562160256959')); //  ..."Card was not recognized!", error: "Luhn checksum failed"
     console.log(validateCreditCardBonus3('372352812960339')); // AE
     console.log(validateCreditCardBonus3('30094853632161')); // Diners Club
     console.log(validateCreditCardBonus3('3577648817006573')); // JCB
     console.log(validateCreditCardBonus3('5595252046672181')); // Master
     console.log(validateCreditCardBonus3('4375528504009126')); // VISA
     
-    var input='';
-    while(input!=-1){
-      console.log(validateCreditCardBonus3(input=prompt('Enter -1 to quit or enter the\n Credit Card Number To Validate and Identify: \n')));
+    var input=' ';
+    while(input!=-1 && input){
+      console.log(validateCreditCardBonus3(input=prompt(JSON.stringify(validateCreditCardBonus3(input))+'\nEnter -1 to quit or enter the\n Credit Card Number To Validate and Identify: \n')));
     }

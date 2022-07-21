@@ -198,7 +198,7 @@ function validateCreditCard(creditCardNum) {
                             }
                             else if(creditCardNum.match(masterCard))
                             {
-                                validation.card = 'Master';
+                                validation.card = 'Mastercard';
                                 validation.valid = true;
                             }
                             else if(creditCardNum.match(discoverCard))

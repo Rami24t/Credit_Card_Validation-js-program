@@ -1,3 +1,6 @@
+# Live Version
+- My solution: https://rami24t.github.io/pb-creditcard-validation-project-Rami24t/
+
 # Project
 # Credit Card Validation
 

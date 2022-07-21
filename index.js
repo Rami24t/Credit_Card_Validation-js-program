@@ -66,13 +66,13 @@ function validateCreditCard(creditCardNum) {
     //----------------------------------Part 2-----------------------------------
     // Removes dashes from a given string n and returns the new string. Example 9999-7777-8888-0000 gives 9999777788880000 as a result.
     function removeDashes(n){
-    if(n.includes('-'))
+    if(n.includes('-')||n.includes(' '))
     {
         let length = n.length;
         let result = '';
         for(i=0;i<length;i++)
         {
-            if(n[i]!='-')
+            if(n[i]!='-'&&n[i]!=' ')
             result += n[i];
         }
         return result;
@@ -83,7 +83,7 @@ function validateCreditCard(creditCardNum) {
     
     // **Bonus #2:**  Return an object indicating whether the credit card is valid, and if not, what the error is  
     // `{ valid: true, number: '9923-3211-9c01-1112' }`  
-    // `{ valid: false, number: '9923-3211-9c01-1112', error: ‘wrong_length’ }`
+    // `{ valid: false, number: '9923-3211-9c01-1112', error: ‘wronglength’ }`
     // ----------
     
     function validateCreditCard(creditCardNum) {
@@ -106,24 +106,24 @@ function validateCreditCard(creditCardNum) {
                         if(isSumGT16(creditCardNum))
                         validation.valid = true;
                         else
-                        validation.error = '_sum is less than 17_';
+                        validation.error = 'sum is less than 17';
                     }
                     else
                     {
-                        validation.error = '_last number is odd_';
+                        validation.error = 'last number is odd';
                     }
                 }
                 else{
-                    validation.error = '_only one type of number_';
+                    validation.error = 'only one type of number';
                 }
             }
             else{
-                validation.error = '_invalid characters_';
+                validation.error = 'invalid characters';
             }
         }
         else
         {
-        validation.error = '_is not 16 digits_';
+        validation.error = 'is not 16 digits';
         }
         return validation;
         };
@@ -131,8 +131,8 @@ function validateCreditCard(creditCardNum) {
     // /**** tests Part 2: Bonus Parts 1 and 2 *****/
     console.log(validateCreditCard('9999-7777-8888-0000')); //{ valid: true, number: '9999-7777-8888-0000' }
     console.log(validateCreditCard('6666-6666-6666-1666')); //{ valid: true, number: '6666-6666-6666-1666' }
-    console.log(validateCreditCard('a923-3211-9c01-1112')); //{ valid: false,number: 'a923-3211-9c01-1112',error: '_invalid characters_' }
-    console.log(validateCreditCard('4444-4444-4444-4444')); //{ valid: false,number: '4444-4444-4444-4444',error: '_only one type of number_' }
+    console.log(validateCreditCard('a923-3211-9c01-1112')); //{ valid: false,number: 'a923-3211-9c01-1112',error: 'invalid characters' }
+    console.log(validateCreditCard('4444-4444-4444-4444')); //{ valid: false,number: '4444-4444-4444-4444',error: 'only one type of number' }
     console.log(validateCreditCard('1211-1111-1111-1112')); //{ valid: true, number: '1211-1111-1111-1112' }
     
     // Bonus 3:
@@ -227,26 +227,26 @@ function validateCreditCard(creditCardNum) {
                             }
                         }
                         else
-                        validation.error = '_sum is less than 17_';
+                        validation.error = 'sum is less than 17';
                     
                 }
                 else{
-                    validation.error = '_only one type of number_';
+                    validation.error = 'only one type of number';
                 }
             }
             else{
-                validation.error = '_invalid characters_';
+                validation.error = 'invalid characters';
             }
         }
         else
         {
-        validation.error = '_invalid number of digits_';
+        validation.error = 'invalid number of digits';
         }
         return validation;
         };
     
-    console.log(validateCreditCardBonus3('a923-3211-9c01-1112')); //{ valid: false,number: 'a923-3211-9c01-1112',error: '_invalid characters_' }
-    console.log(validateCreditCardBonus3('4444-4444-4444-4444')); //{ valid: false,number: '4444-4444-4444-4444',error: '_only one type of number_' }
+    console.log(validateCreditCardBonus3('a923-3211-9c01-1112')); //{ valid: false,number: 'a923-3211-9c01-1112',error: 'invalid characters' }
+    console.log(validateCreditCardBonus3('4444-4444-4444-4444')); //{ valid: false,number: '4444-4444-4444-4444',error: 'only one type of number' }
     console.log(validateCreditCardBonus3('5018011773003302')); // Maestro 
     console.log(validateCreditCardBonus3('4368589145622312')); // Visa16
     console.log(validateCreditCardBonus3('5299694182311539')); // MasterCard 

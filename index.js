@@ -140,6 +140,24 @@ function validateDigits(creditCardNum){
     return creditCardNum.length>13 && creditCardNum.length<17;
 }
 
+function luhnChecksum(num) {
+      // The Luhn Algorithm.
+      var nCheck = 0, nDigit = 0, bEven = false;
+      num = num.replace(/\D/g, "");
+
+      for (var n = num.length - 1; n >= 0; n--) {
+          var cDigit = num.charAt(n),
+                nDigit = parseInt(cDigit, 10);
+
+          if (bEven) {
+              if ((nDigit *= 2) > 9) nDigit -= 9;
+          }
+
+          nCheck += nDigit;
+          bEven = !bEven;
+      }
+      return (nCheck % 10) == 0;
+  }
 function validateCreditCardBonus3(creditCardNum) {
     // returns an object // **Bonus #2:**  Return an object indicating whether the credit card is valid, and if not, what the error is
     let validation = {
@@ -158,7 +176,8 @@ function validateCreditCardBonus3(creditCardNum) {
             {
                     if(isSumGT16(creditCardNum))
                     {
-                        let aeCard = /^(?:3[47][0-9]{13})$/;
+                        if(luhnChecksum(creditCardNum))
+                        {let aeCard = /^(?:3[47][0-9]{13})$/;
                         let visaCard = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
                         let masterCard = /^(?:5[1-5][0-9]{14})$/;
                         let discoverCard = /^6(?:011|5[0-9]{2})[0-9]{12}/;
@@ -199,6 +218,10 @@ function validateCreditCardBonus3(creditCardNum) {
                         {
                             validation.card = 'Maestro';
                             validation.valid = true;
+                        }}
+                        else
+                        {
+                            validation.error='Luhn checksum failed'
                         }
                     }
                     else
@@ -226,7 +249,8 @@ console.log(validateCreditCardBonus3('5018011773003302')); // Maestro
 console.log(validateCreditCardBonus3('4368589145622312')); // Visa16
 console.log(validateCreditCardBonus3('5299694182311539')); // MasterCard 
 console.log(validateCreditCardBonus3('6011594786717005')); // Discover 
-console.log(validateCreditCardBonus3('378562160256959')); //  AE
+console.log(validateCreditCardBonus3('378562160256959')); //  AE  
+console.log(validateCreditCardBonus3('372352812960339')); // AE
 console.log(validateCreditCardBonus3('30094853632161')); // Diners Club
 console.log(validateCreditCardBonus3('3577648817006573')); // JCB
 console.log(validateCreditCardBonus3('5595252046672181')); // Master

@@ -150,8 +150,8 @@ function validateCreditCardBonus3(creditCardNum) {
     if (!creditCardNum)
         return false;
     let validation = {
-        valid: 'no',
         number: creditCardNum,
+        valid: 'no',
         card: 'Card was not recognized!'
     }
     creditCardNum = removeDashesSpaces(creditCardNum);

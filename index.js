@@ -249,8 +249,8 @@ console.log(validateCreditCardBonus3('4375528504009126')); // VISA
 var input = ' ';
 while (input != '-1' && input) {
     if (input == ' ') {
-        console.log(validateCreditCardBonus3(input = prompt('Enter -1 to quit or enter the\n Credit Card Number To Validate and Identify: \n')));
+        console.log(validateCreditCardBonus3(input = prompt('Enter -1 to quit or enter the\nfirst Credit Card Number To Validate and Identify: \n')));
     }
     else
-        console.log(validateCreditCardBonus3(input = prompt(JSON.stringify(validateCreditCardBonus3(input)) + '\n\n\n- Enter "-1" to quit \nor\n- Enter Credit Card Number To Validate and Identify: \n')));
+        console.log(validateCreditCardBonus3(input = prompt(JSON.stringify(validateCreditCardBonus3(input.number)) + '\n' + JSON.stringify(validateCreditCardBonus3(input.valid)) +'\n' + JSON.stringify(validateCreditCardBonus3(input.card)) + '\n' + JSON.stringify(validateCreditCardBonus3(input.error))  + '\n\n\n- Enter "-1" to quit \nor\n- Enter another Credit Card Number To Validate and Identify: \n')));
 }

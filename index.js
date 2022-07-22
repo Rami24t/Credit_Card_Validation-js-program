@@ -179,48 +179,64 @@ function validateCreditCard(creditCardNum) {
                         if(isSumGT16(creditCardNum))
                         {
                             if(luhnChecksum(creditCardNum))
-                            {let aeCard = /^(?:3[47][0-9]{13})$/;
-                            let visaCard = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-                            let masterCard = /^(?:5[1-5][0-9]{14})$/;
-                            let discoverCard = /^6(?:011|5[0-9]{2})[0-9]{12}/;
-                            let dinersCard =  /^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$/;
-                            let jcbCard =  /^(?:(?:2131|1800|35\d{3})\d{11})$/;
-                            let maestroCard= /^(5018|5081|5044|5020|5038|603845|6304|6759|676[1-3]|6799|6220|504834|504817|504645)[0-9]{8,15}$/;
-                            if(creditCardNum.match(aeCard))
                             {
-                                validation.card = 'American Express';
-                                validation.valid = true;
+                                let aeCard = /^(?:3[47][0-9]{13})$/;
+                                let visaCard = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+                                let masterCard = /^(?:5[1-5][0-9]{14})$/;
+                                let discoverCard = /^6(?:011|5[0-9]{2})[0-9]{12}/;
+                                let dinersCard =  /^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$/;
+                                let jcbCard =  /^(?:(?:2131|1800|35\d{3})\d{11})$/;
+                                let maestroCard= /^(5018|5081|5044|5020|5038|603845|6304|6759|676[1-3]|6799|6220|504834|504817|504645)[0-9]{8,15}$/;
+                                let amex = new RegExp('^3[47][0-9]{13}$');
+                                let cup1 = new RegExp('^62[0-9]{14}[0-9]*$');
+                                let cup2 = new RegExp('^81[0-9]{14}[0-9]*$');
+                                let mastercard2 = new RegExp('^2[2-7][0-9]{14}$');                          
+                                let disco1 = new RegExp('^6011[0-9]{12}[0-9]*$');
+                                let disco2 = new RegExp('^62[24568][0-9]{13}[0-9]*$');
+                                let disco3 = new RegExp('^6[45][0-9]{14}[0-9]*$');                            
+                                let diners = new RegExp('^3[0689][0-9]{12}[0-9]*$');
+                                let jcb =  new RegExp('^35[0-9]{14}[0-9]*$');
+                                if(creditCardNum.match(aeCard) || creditCardNum.match(amex))
+                                {
+                                    validation.card = 'American Express';
+                                    validation.valid = true;
+                                }
+                                else if(creditCardNum.match(visaCard))
+                                {
+                                    validation.card = 'VISA';
+                                    validation.valid = true;
+                                }
+                                else if(creditCardNum.match(masterCard)||creditCardNum.match(mastercard2))
+                                {
+                                    validation.card = 'Mastercard';
+                                    validation.valid = true;
+                                }
+                                else if(creditCardNum.match(discoverCard) || creditCardNum.match(disco1) || creditCardNum.match(disco2) || creditCardNum.match(disco3))
+                                {
+                                    validation.card = 'Discover';
+                                    validation.valid = true;
+                                }
+                                else if(creditCardNum.match(dinersCard) || creditCardNum.match(diners))
+                                {
+                                    validation.card = 'Diners';
+                                    validation.valid = true;
+                                }
+                                else if(creditCardNum.match(jcbCard) || creditCardNum.match(jcb))
+                                {
+                                    validation.card = 'JCB';
+                                    validation.valid = true;
+                                }                        
+                                else if(creditCardNum.match(maestroCard))
+                                {
+                                    validation.card = 'Maestro';
+                                    validation.valid = true;
+                                }
+                                else if(creditCardNum.match(cup1) || creditCardNum.match(cup2))
+                                {
+                                    validateCreditCard.card = 'China Union Pay';
+                                    validation.valid = true;
+                                }
                             }
-                            else if(creditCardNum.match(visaCard))
-                            {
-                                validation.card = 'VISA';
-                                validation.valid = true;
-                            }
-                            else if(creditCardNum.match(masterCard))
-                            {
-                                validation.card = 'Mastercard';
-                                validation.valid = true;
-                            }
-                            else if(creditCardNum.match(discoverCard))
-                            {
-                                validation.card = 'Discover';
-                                validation.valid = true;
-                            }
-                            else if(creditCardNum.match(dinersCard))
-                            {
-                                validation.card = 'Diners';
-                                validation.valid = true;
-                            }
-                            else if(creditCardNum.match(jcbCard))
-                            {
-                                validation.card = 'JCB';
-                                validation.valid = true;
-                            }                        
-                            else if(creditCardNum.match(maestroCard))
-                            {
-                                validation.card = 'Maestro';
-                                validation.valid = true;
-                            }}
                             else
                             {
                                 validation.error='Luhn checksum failed'

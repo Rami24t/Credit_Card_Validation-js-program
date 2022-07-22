@@ -252,5 +252,5 @@ while (input != '-1' && input) {
         console.log(validateCreditCardBonus3(input = prompt('Enter -1 to quit or enter the\n Credit Card Number To Validate and Identify: \n')));
     }
     else
-        console.log(validateCreditCardBonus3(input = prompt(JSON.stringify(validateCreditCardBonus3(input)) + '\nEnter -1 to quit or enter the\n Credit Card Number To Validate and Identify: \n')));
+        console.log(validateCreditCardBonus3(input = prompt(JSON.stringify(validateCreditCardBonus3(input)) + '\n\n\n- Enter "-1" to quit \nor\n- Enter Credit Card Number To Validate and Identify: \n')));
 }

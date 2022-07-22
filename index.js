@@ -2,17 +2,17 @@
 // # Credit Card Validation
 //----------------------------------Part 1-----------------------------------
 
-function validateCreditCard(creditCardNum) {
-    // returns  `true`  or  `false`
-    creditCardNum = removeDashes(creditCardNum);
-    return is16digits(creditCardNum) && isNumber(creditCardNum) && includesDifferent(creditCardNum) && isLastEven(creditCardNum) && isSumGT16(creditCardNum);
-};
+// function validateCreditCard(creditCardNum) {
+//     // returns  `true`  or  `false`
+//     creditCardNum = removeDashesSpaces(creditCardNum);
+//     return is16digits(creditCardNum) && isNumber(creditCardNum) && includesDifferent(creditCardNum) && isLastEven(creditCardNum) && isSumGT16(creditCardNum);
+// };
 
-// Is it 16 digits
-function is16digits(n) {
-    // returns  `true`  or  `false`
-    return n.length == 16;
-}
+// // Is it 16 digits
+// function is16digits(n) {
+//     // returns  `true`  or  `false`
+//     return n.length == 16;
+// }
 
 // Are all numbers - n should be a string of numbers - +n tries to turn n into a number.
 function isNumber(n) {
@@ -36,11 +36,11 @@ function includesDifferent(n) {
     return false;
 }
 
-// The last digit must be even
-function isLastEven(n) {
-    // returns  `true`  or  `false`
-    return +n[15] % 2 == 0
-}
+// // The last digit must be even
+// function isLastEven(n) {
+//     // returns  `true`  or  `false`
+//     return +n[15] % 2 == 0
+// }
 
 // Is the sum of all the digits must be greater than 16
 // Gives true only if the sum of all digits is greater than 16, otherwise gives false.
@@ -53,16 +53,16 @@ function isSumGT16(n) {
     return sum > 16;
 }
 
-/** tests for part 1 **/
-console.log('Tests part 1:\n',
-    'Valid:', validateCreditCard('9999777788880000'), validateCreditCard('6666666666661666'), '\n',
-    'Invalid:', validateCreditCard('a92332119c011112'), validateCreditCard('4444444444444444'), validateCreditCard('1111111111111110'), validateCreditCard('6666666666666661'));
+// /** tests for part 1 **/
+// console.log('Tests part 1:\n',
+//     'Valid:', validateCreditCard('9999777788880000'), validateCreditCard('6666666666661666'), '\n',
+//     'Invalid:', validateCreditCard('a92332119c011112'), validateCreditCard('4444444444444444'), validateCreditCard('1111111111111110'), validateCreditCard('6666666666666661'));
 
 
 
 //----------------------------------Part 2-----------------------------------
 // Removes dashes from a given string n and returns the new string. Example 9999-7777-8888-0000 gives 9999777788880000 as a result.
-function removeDashes(n) {
+function removeDashesSpaces(n) {
     if (n.includes('-') || n.includes(' ')) {
         let length = n.length;
         let result = '';
@@ -81,54 +81,53 @@ function removeDashes(n) {
 // `{ valid: false, number: '9923-3211-9c01-1112', error: ‘wronglength’ }`
 // ----------
 
-function validateCreditCard(creditCardNum) {
-    // returns an object // **Bonus #2:**  Return an object indicating whether the credit card is valid, and if not, what the error is
-    let validation = {
-        valid: false,
-        number: creditCardNum
-    }
+// function validateCreditCard(creditCardNum) {
+//     // returns an object // **Bonus #2:**  Return an object indicating whether the credit card is valid, and if not, what the error is
+//     let validation = {
+//         valid: false,
+//         number: creditCardNum
+//     }
 
-    creditCardNum = removeDashes(creditCardNum);
+//     creditCardNum = removeDashesSpaces(creditCardNum);
 
-    if (is16digits(creditCardNum)) {
-        if (isNumber(creditCardNum)) {
-            if (includesDifferent(creditCardNum)) {
-                if (isLastEven(creditCardNum)) {
-                    if (isSumGT16(creditCardNum))
-                        validation.valid = true;
-                    else
-                        validation.error = 'sum is less than 17';
-                }
-                else {
-                    validation.error = 'last number is odd';
-                }
-            }
-            else {
-                validation.error = 'only one type of number';
-            }
-        }
-        else {
-            validation.error = 'invalid characters';
-        }
-    }
-    else {
-        validation.error = 'is not 16 digits';
-    }
-    return validation;
-};
+//     if (is16digits(creditCardNum)) {
+//         if (isNumber(creditCardNum)) {
+//             if (includesDifferent(creditCardNum)) {
+//                 if (isLastEven(creditCardNum)) {
+//                     if (isSumGT16(creditCardNum))
+//                         validation.valid = true;
+//                     else
+//                         validation.error = 'sum is less than 17';
+//                 }
+//                 else {
+//                     validation.error = 'last number is odd';
+//                 }
+//             }
+//             else {
+//                 validation.error = 'only one type of number';
+//             }
+//         }
+//         else {
+//             validation.error = 'invalid characters';
+//         }
+//     }
+//     else {
+//         validation.error = 'is not 16 digits';
+//     }
+//     return validation;
+// };
 
-// /**** tests Part 2: Bonus Parts 1 and 2 *****/
-console.log(validateCreditCard('9999-7777-8888-0000')); //{ valid: true, number: '9999-7777-8888-0000' }
-console.log(validateCreditCard('6666-6666-6666-1666')); //{ valid: true, number: '6666-6666-6666-1666' }
-console.log(validateCreditCard('a923-3211-9c01-1112')); //{ valid: false,number: 'a923-3211-9c01-1112',error: 'invalid characters' }
-console.log(validateCreditCard('4444-4444-4444-4444')); //{ valid: false,number: '4444-4444-4444-4444',error: 'only one type of number' }
-console.log(validateCreditCard('1211-1111-1111-1112')); //{ valid: true, number: '1211-1111-1111-1112' }
+// // /**** tests Part 2: Bonus Parts 1 and 2 *****/
+// console.log(validateCreditCard('9999-7777-8888-0000')); //{ valid: true, number: '9999-7777-8888-0000' }
+// console.log(validateCreditCard('6666-6666-6666-1666')); //{ valid: true, number: '6666-6666-6666-1666' }
+// console.log(validateCreditCard('a923-3211-9c01-1112')); //{ valid: false,number: 'a923-3211-9c01-1112',error: 'invalid characters' }
+// console.log(validateCreditCard('4444-4444-4444-4444')); //{ valid: false,number: '4444-4444-4444-4444',error: 'only one type of number' }
+// console.log(validateCreditCard('1211-1111-1111-1112')); //{ valid: true, number: '1211-1111-1111-1112' }
 
 // Bonus 3:
 function validateDigits(creditCardNum) {
     return creditCardNum.length > 13 && creditCardNum.length < 21;
 }
-
 function luhnChecksum(num) {
     // The Luhn Algorithm.
     var nCheck = 0, nDigit = 0, bEven = false;
@@ -150,20 +149,18 @@ function luhnChecksum(num) {
 function validateCreditCardBonus3(creditCardNum) {
     if (!creditCardNum)
         return false;
-    // returns an object // **Bonus #2:**  Return an object indicating whether the credit card is valid, and if not, what the error is
     let validation = {
-        valid: false,
+        valid: 'no',
         number: creditCardNum,
         card: 'Card was not recognized!'
     }
-
-    creditCardNum = removeDashes(creditCardNum);
-
+    creditCardNum = removeDashesSpaces(creditCardNum);
     if (validateDigits(creditCardNum)) {
         if (isNumber(creditCardNum)) {
             if (includesDifferent(creditCardNum)) {
                 if (isSumGT16(creditCardNum)) {
                     if (luhnChecksum(creditCardNum)) {
+                        validation.valid = 'maybe';
                         let visaCard = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
                         let aeCard = /^(?:3[47][0-9]{13})$/;
                         let amex = new RegExp('^3[47][0-9]{13}$');
@@ -182,35 +179,35 @@ function validateCreditCardBonus3(creditCardNum) {
                         let disco3 = new RegExp('^6[45][0-9]{14}[0-9]*$');
                         if (creditCardNum.match(aeCard) || creditCardNum.match(amex)) {
                             validation.card = 'American Express';
-                            validation.valid = true;
+                            validation.valid = 'yes';
                         }
                         else if (creditCardNum.match(visaCard)) {
                             validation.card = 'VISA';
-                            validation.valid = true;
+                            validation.valid = 'yes';
                         }
                         else if (creditCardNum.match(masterCard) || creditCardNum.match(masterCard2)) {
                             validation.card = 'Mastercard';
-                            validation.valid = true;
+                            validation.valid = 'yes';
                         }
                         else if (creditCardNum.match(discoverCard) || creditCardNum.match(disco1) || creditCardNum.match(disco2) || creditCardNum.match(disco3)) {
                             validation.card = 'Discover';
-                            validation.valid = true;
+                            validation.valid = 'yes';
                         }
                         else if (creditCardNum.match(dinersCard) || creditCardNum.match(diners)) {
                             validation.card = 'Diners';
-                            validation.valid = true;
+                            validation.valid = 'yes';
                         }
                         else if (creditCardNum.match(jcbCard) || creditCardNum.match(jcb)) {
                             validation.card = 'JCB';
-                            validation.valid = true;
+                            validation.valid = 'yes';
                         }
                         else if (creditCardNum.match(maestroCard)) {
                             validation.card = 'Maestro';
-                            validation.valid = true;
+                            validation.valid = 'yes';
                         }
                         else if (creditCardNum.match(cup1) || creditCardNum.match(cup2)) {
                             validateCreditCard.card = 'China Union Pay';
-                            validation.valid = true;
+                            validation.valid = 'yes';
                         }
                     }
                     else {

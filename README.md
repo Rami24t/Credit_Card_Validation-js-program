@@ -3,4 +3,4 @@
 
 # Credit Card Numbers Validation + Identification Project
 
-A js program that validates credit card numbers and identifies the card issuer.
+A js. program that validates credit card numbers and identifies the card issuer.
